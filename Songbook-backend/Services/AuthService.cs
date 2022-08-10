@@ -95,4 +95,19 @@ public class AuthService : IAuthService
             RefreshToken = refreshToken
         };
     }
+
+    public void DeleteAllRefreshTokensByUserId(Guid userId)
+    {
+        Console.WriteLine(userId);
+        var refreshToken = _context.RefreshTokens.FirstOrDefault(r => r.UserId == userId);
+
+        while (refreshToken != null)
+        {
+            _context.Remove(refreshToken);
+            _context.SaveChanges();
+            refreshToken = _context.RefreshTokens.FirstOrDefault(r => r.UserId == userId);
+        }
+
+        _context.SaveChanges();
+    }
 }

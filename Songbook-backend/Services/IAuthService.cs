@@ -10,4 +10,5 @@ public interface IAuthService
     string CreateAccessToken(User user);
     string CreateRefreshToken();
     AuthenticatedUserResponse Authenticate(User user);
+    void DeleteAllRefreshTokensByUserId(Guid userId);
 }

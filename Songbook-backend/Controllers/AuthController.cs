@@ -77,6 +77,10 @@ public class AuthController : ControllerBase
         {
             return BadRequest("Wrong password");
         }
+        
+        
+        
+        _authService.DeleteAllRefreshTokensByUserId(user.Id);
 
         AuthenticatedUserResponse response = _authService.Authenticate(user);
 
@@ -128,16 +132,7 @@ public class AuthController : ControllerBase
             return Unauthorized();
         }
         
-        var refreshToken = await _context.RefreshTokens.FirstOrDefaultAsync(r => r.UserId == userId);
-        
-        while (refreshToken != null)
-        {
-            _context.Remove(refreshToken);
-            _context.SaveChanges();
-            refreshToken = await _context.RefreshTokens.FirstOrDefaultAsync(r => r.UserId == userId);
-        }
-
-        _context.SaveChanges();
+        _authService.DeleteAllRefreshTokensByUserId(userId);
 
         return NoContent();    
     }
