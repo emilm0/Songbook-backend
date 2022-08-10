@@ -1,4 +1,4 @@
-﻿using TestSongbook.Models;
+﻿using Songbook_backend.Logger.Models;
 using TestSongbook.Models.Responses;
 
 namespace Songbook_backend.Logger.Services;

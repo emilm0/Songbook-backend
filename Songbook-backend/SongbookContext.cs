@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TestSongbook.Models;
+using Songbook_backend.Logger.Models;
 
 namespace TestSongbook;
 

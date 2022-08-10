@@ -1,6 +1,6 @@
-﻿using System.Security.Claims;
+﻿using Songbook_backend.Logger.Models;
+using System.Security.Claims;
 using System.Security.Cryptography;
-using TestSongbook.Models;
 using TestSongbook.Models.Responses;
 using TestSongbook.Services.Tokens;
 

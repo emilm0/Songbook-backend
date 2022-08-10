@@ -3,9 +3,9 @@ global using TestSongbook;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Songbook_backend.Logger.Services;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
-using TestSongbook.Services;
 using TestSongbook.Services.Tokens;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
