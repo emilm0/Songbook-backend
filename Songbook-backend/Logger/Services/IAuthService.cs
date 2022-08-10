@@ -1,7 +1,7 @@
 ﻿using TestSongbook.Models;
 using TestSongbook.Models.Responses;
 
-namespace TestSongbook.Services;
+namespace Songbook_backend.Logger.Services;
 
 public interface IAuthService
 {

@@ -7,7 +7,7 @@ using TestSongbook.Models.Responses;
 using TestSongbook.Services;
 using TestSongbook.Services.Tokens;
 
-namespace TestSongbook.Controllers;
+namespace Songbook_backend.Logger.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -77,9 +77,9 @@ public class AuthController : ControllerBase
         {
             return BadRequest("Wrong password");
         }
-        
-        
-        
+
+
+
         _authService.DeleteAllRefreshTokensByUserId(user.Id);
 
         AuthenticatedUserResponse response = _authService.Authenticate(user);
@@ -126,15 +126,15 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Logout()
     {
         string rawUserId = HttpContext.User.FindFirstValue("id");
-        
-        if(!Guid.TryParse(rawUserId, out Guid userId))
+
+        if (!Guid.TryParse(rawUserId, out Guid userId))
         {
             return Unauthorized();
         }
-        
+
         _authService.DeleteAllRefreshTokensByUserId(userId);
 
-        return NoContent();    
+        return NoContent();
     }
 
     // GET: api/Users

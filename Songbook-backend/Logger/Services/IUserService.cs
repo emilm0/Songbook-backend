@@ -1,7 +1,7 @@
-﻿using TestSongbook.Models;
+﻿using Songbook_backend.Logger.Models;
 using TestSongbook.Models.Requests;
 
-namespace TestSongbook.Services;
+namespace Songbook_backend.Logger.Services;
 
 public interface IUserService
 {

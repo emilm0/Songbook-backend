@@ -4,7 +4,7 @@ using TestSongbook.Models;
 using TestSongbook.Models.Responses;
 using TestSongbook.Services.Tokens;
 
-namespace TestSongbook.Services;
+namespace Songbook_backend.Logger.Services;
 
 public class AuthService : IAuthService
 {
@@ -46,7 +46,7 @@ public class AuthService : IAuthService
     public string CreateAccessToken(User user)
     {
         List<Claim> claims = new List<Claim>
-        {   
+        {
             new Claim("id", user.Id.ToString()),
             new Claim(ClaimTypes.Name, user.Email),
             new Claim(ClaimTypes.Role, _userService.GetUserRoleNameById(user.RoleId))
@@ -56,7 +56,7 @@ public class AuthService : IAuthService
             _configuration["Authentication:AccessTokenSecret"],
             _configuration["Authentication:Issuer"],
             _configuration["Authentication:Audience"],
-            Int32.Parse(_configuration["Authentication:AccessTokenExpirationMinutes"]),
+            int.Parse(_configuration["Authentication:AccessTokenExpirationMinutes"]),
             claims
             );
 
@@ -69,7 +69,7 @@ public class AuthService : IAuthService
             _configuration["Authentication:RefreshTokenSecret"],
             _configuration["Authentication:Issuer"],
             _configuration["Authentication:Audience"],
-            Int32.Parse(_configuration["Authentication:RefreshTokenExpirationMinutes"]));
+            int.Parse(_configuration["Authentication:RefreshTokenExpirationMinutes"]));
 
         return token;
     }

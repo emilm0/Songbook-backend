@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TestSongbook.Models;
+using Songbook_backend.Logger.Models;
 using TestSongbook.Models.Requests;
 
-namespace TestSongbook.Services;
+namespace Songbook_backend.Logger.Services;
 
 public class UserService : IUserService
 {
@@ -38,7 +38,7 @@ public class UserService : IUserService
     {
         var userRole = _context.UserRoles.FirstOrDefault(r => r.Name == userRoleName);
 
-        if(userRole == null)
+        if (userRole == null)
         {
             userRole = _context.UserRoles.FirstOrDefault(r => r.Name == "User");
             return userRole.Id;

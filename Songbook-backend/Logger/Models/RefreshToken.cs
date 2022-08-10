@@ -1,4 +1,4 @@
-﻿namespace TestSongbook.Models;
+﻿namespace Songbook_backend.Logger.Models;
 
 public class RefreshToken
 {
