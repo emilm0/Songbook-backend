@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Songbook_backend.Logger.Services;
+using Songbook_backend.Songs.Services;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 using TestSongbook.Services.Tokens;
-using Songbook_backend.Songs.Controllers;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -31,6 +31,7 @@ builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ITokenGenerator, TokenGenerator>();
 builder.Services.AddTransient<IRefreshTokenValidator, RefreshTokenValidator>();
+builder.Services.AddTransient<ISongService, SongService>();
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<SongbookContext>(options =>
@@ -87,7 +88,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.MapSongEndpoints();
 
 app.Run();

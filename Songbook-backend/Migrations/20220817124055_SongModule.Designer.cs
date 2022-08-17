@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestSongbook;
 
@@ -11,9 +12,10 @@ using TestSongbook;
 namespace Songbook_backend.Migrations
 {
     [DbContext(typeof(SongbookContext))]
-    partial class SongbookContextModelSnapshot : ModelSnapshot
+    [Migration("20220817124055_SongModule")]
+    partial class SongModule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

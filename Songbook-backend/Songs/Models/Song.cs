@@ -16,13 +16,13 @@ public class Song
     public Guid GroupId { get; set; }
     public Guid TypeId { get; set; }
     public DateTime CreateTime { get; set; }
-    public string LinkPl { get; set; }
-    public string LinkOrigin { get; set; }
-    public string LinkToDrive { get; set; }
-    public string LinkToNotes { get; set; }
-    public Guid EditId { get; set; }
+    public string UrlPl { get; set; }
+    public string UrlOrigin { get; set; }
+    public string UrlDrive { get; set; }
+    public string UrlNotes { get; set; }
+    public Guid? EditId { get; set; }
     public bool IsReadyToUser { get; set; }
     public bool IsInUse { get; set; }
-    public DateTime LastUsed { get; set; }
+    public DateTime? LastUsed { get; set; }
     public int CounterOfUse { get; set; }
 }

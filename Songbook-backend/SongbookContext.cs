@@ -39,6 +39,20 @@ public class SongbookContext : DbContext
                 UserRoles.AddRange(roles);
                 SaveChanges();
             }
+
+            if (!SongTypes.Any())
+            {
+                var types = GetSongTypes();
+                SongTypes.AddRange(types);
+                SaveChanges();
+            }
+
+            if (!SongGroups.Any())
+            {
+                var groups = GetSongGroups();
+                SongGroups.AddRange(groups);
+                SaveChanges();
+            }
         }
     }
 
@@ -46,23 +60,37 @@ public class SongbookContext : DbContext
     {
         var roles = new List<UserRole>()
         {
-            new UserRole()
-            {
-                Name = "User"
-            },
+            new UserRole() { Name = "User" },
 
-            new UserRole()
-            {
-                Name = "Editor"
-            },
+            new UserRole() { Name = "Editor" },
 
-            new UserRole()
-            {
-                Name = "Admin"
-            }
+            new UserRole() { Name = "Admin" }
         };
 
         return roles;
     }
 
+    private IEnumerable<SongGroup> GetSongGroups()
+    {
+        var groups = new List<SongGroup>()
+        {
+            new SongGroup() { Name = "Group1" },
+            new SongGroup() { Name = "Group2" },
+            new SongGroup() { Name = "Group3" }
+        };
+
+        return groups;
+    }
+    
+    private IEnumerable<SongType> GetSongTypes()
+    {
+        var types = new List<SongType>()
+        {
+            new SongType() { Name = "Type1" },
+            new SongType() { Name = "Type2" },
+            new SongType() { Name = "Type3" }
+        };
+
+        return types;
+    }
 }
