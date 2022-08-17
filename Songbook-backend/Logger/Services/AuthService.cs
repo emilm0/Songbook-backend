@@ -48,7 +48,8 @@ public class AuthService : IAuthService
         List<Claim> claims = new List<Claim>
         {
             new Claim("id", user.Id.ToString()),
-            new Claim(ClaimTypes.Name, user.Email),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Name, user.FirstName),
             new Claim(ClaimTypes.Role, _userService.GetUserRoleNameById(user.RoleId))
         };
 
@@ -98,7 +99,6 @@ public class AuthService : IAuthService
 
     public void DeleteAllRefreshTokensByUserId(Guid userId)
     {
-        Console.WriteLine(userId);
         var refreshToken = _context.RefreshTokens.FirstOrDefault(r => r.UserId == userId);
 
         while (refreshToken != null)
