@@ -1,4 +1,4 @@
-global using Microsoft.EntityFrameworkCore;
+﻿global using Microsoft.EntityFrameworkCore;
 global using TestSongbook;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -7,6 +7,7 @@ using Songbook_backend.Logger.Services;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 using TestSongbook.Services.Tokens;
+using Songbook_backend.Songs.Controllers;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -86,5 +87,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapSongEndpoints();
 
 app.Run();

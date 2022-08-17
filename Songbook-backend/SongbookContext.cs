@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Songbook_backend.Logger.Models;
+﻿using Songbook_backend.Logger.Models;
+using Songbook_backend.Songs.Models;
 
 namespace TestSongbook;
 
@@ -12,10 +12,17 @@ public class SongbookContext : DbContext
         Seed();
     }
 
+    //Logger
     public DbSet<User> Users { get; set; }
     public DbSet<UserRole> UserRoles { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
-
+    
+    //Song
+    public DbSet<Song> Songs { get; set; }
+    public DbSet<Line> Lines { get; set; }
+    public DbSet<SongGroup> SongGroups { get; set; }
+    public DbSet<SongType> SongTypes { get; set; }
+    public DbSet<SongPart> SongParts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

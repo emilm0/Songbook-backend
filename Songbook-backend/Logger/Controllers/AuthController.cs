@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Songbook_backend.Logger.Models;
+using Songbook_backend.Logger.Services;
 using System.Security.Claims;
-using TestSongbook.Models;
 using TestSongbook.Models.Requests;
 using TestSongbook.Models.Responses;
-using TestSongbook.Services;
 using TestSongbook.Services.Tokens;
 
 namespace Songbook_backend.Logger.Controllers;
