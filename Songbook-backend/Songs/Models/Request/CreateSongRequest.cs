@@ -29,4 +29,5 @@ public class CreateSongRequest
     public string UrlDrive { get; set; }
     public string UrlNotes { get; set; }
     public bool IsRedayToUse { get; set; }
+    public List<LineRequest> Lines { get; set; }
 }

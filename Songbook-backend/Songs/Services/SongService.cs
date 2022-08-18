@@ -8,11 +8,13 @@ public class SongService : ISongService
 {
     private readonly SongbookContext _context;
     private readonly IEditionService _editionService;
+    private readonly ILineService _lineService;
 
-    public SongService(SongbookContext context, IEditionService editionService)
+    public SongService(SongbookContext context, IEditionService editionService, ILineService lineService)
     {
         _context = context;
         _editionService = editionService;
+        _lineService = lineService;
     }
 
     public Song CreateSong(CreateSongRequest songRequest, string creatorName)

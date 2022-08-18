@@ -33,6 +33,7 @@ builder.Services.AddTransient<ITokenGenerator, TokenGenerator>();
 builder.Services.AddTransient<IRefreshTokenValidator, RefreshTokenValidator>();
 builder.Services.AddTransient<ISongService, SongService>();
 builder.Services.AddTransient<IEditionService, EditionService>();
+builder.Services.AddTransient<ILineService, LineService>();
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<SongbookContext>(options =>

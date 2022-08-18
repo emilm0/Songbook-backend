@@ -14,12 +14,17 @@ namespace Songbook_backend.Songs.Controllers
         private readonly SongbookContext _context;
         private readonly ISongService _songService;
         private readonly IEditionService _editionService;
+        private readonly ILineService _lineService;
 
-        public SongsController(SongbookContext context, ISongService songService, IEditionService editionService)
+        public SongsController(SongbookContext context, 
+                                ISongService songService, 
+                                IEditionService editionService, 
+                                ILineService lineService)
         {
             _context = context;
             _songService = songService;
             _editionService = editionService;
+            _lineService = lineService;
         }
 
         // GET: api/Songs
@@ -105,8 +110,11 @@ namespace Songbook_backend.Songs.Controllers
             var userName = "Test";
 
             var newSong = _songService.CreateSong(songRequest, userName);
-
             _context.Songs.Add(newSong);
+
+            var lines = _lineService.CreateLineList(newSong.Id, songRequest.Lines);
+            _context.Lines.AddRange(lines);
+
             await _context.SaveChangesAsync();
 
             return Ok();

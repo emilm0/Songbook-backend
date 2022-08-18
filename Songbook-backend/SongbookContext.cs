@@ -55,6 +55,13 @@ public class SongbookContext : DbContext
                 SongGroups.AddRange(groups);
                 SaveChanges();
             }
+
+            if (!SongParts.Any())
+            {
+                var parts = GetSongParts();
+                SongParts.AddRange(parts);
+                SaveChanges();
+            }
         }
     }
 
