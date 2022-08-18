@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TestSongbook;
+using Songbook_backend;
 
 #nullable disable
 
 namespace Songbook_backend.Migrations
 {
     [DbContext(typeof(SongbookContext))]
-    [Migration("20220817124055_SongModule")]
-    partial class SongModule
+    [Migration("20220818092141_Refresh")]
+    partial class Refresh
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,6 +89,31 @@ namespace Songbook_backend.Migrations
                     b.ToTable("UserRoles");
                 });
 
+            modelBuilder.Entity("Songbook_backend.Songs.Models.Edition", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EditorName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("SongId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Editions");
+                });
+
             modelBuilder.Entity("Songbook_backend.Songs.Models.Line", b =>
                 {
                     b.Property<Guid>("Id")
@@ -96,11 +121,9 @@ namespace Songbook_backend.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Chords")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ChordsOrigin")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LinePosition")
@@ -116,7 +139,6 @@ namespace Songbook_backend.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TextOrigin")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TextPL")
@@ -139,11 +161,9 @@ namespace Songbook_backend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BasedOn")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Copyright")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CounterOfUse")
@@ -151,6 +171,10 @@ namespace Songbook_backend.Migrations
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatorName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("EditId")
                         .HasColumnType("uniqueidentifier");
@@ -161,15 +185,13 @@ namespace Songbook_backend.Migrations
                     b.Property<bool>("IsInUse")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsReadyToUser")
+                    b.Property<bool>("IsReadyToUse")
                         .HasColumnType("bit");
 
                     b.Property<string>("Key")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KeyOrigin")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastUsed")
@@ -179,38 +201,32 @@ namespace Songbook_backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Tempo")
+                    b.Property<int?>("Tempo")
                         .HasColumnType("int");
 
-                    b.Property<string>("TitleOrigin")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TitlePl")
-                        .IsRequired()
+                    b.Property<string>("TitleOrigin")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Translator")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("TypeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UrlDrive")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UrlNotes")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UrlOrigin")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UrlPl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
