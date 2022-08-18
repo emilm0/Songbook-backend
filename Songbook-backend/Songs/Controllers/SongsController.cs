@@ -56,10 +56,22 @@ namespace Songbook_backend.Songs.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSong(Guid id, EditSongRequest songRequest)
         {
-            //var songToUpdate = _context.Songs.Find(id);
+
             if(!SongExists(id))
             {
                 return NotFound();
+            }
+
+            if (_songService.TitleIsAlreadyUsed(songRequest.Title))
+            {
+                return BadRequest("Title is already taken");
+
+            }
+
+            if (_songService.TitleOriginIsAlreadyUsed(songRequest.TitleOrigin))
+            {
+                return BadRequest("TitleOrigin is already taken");
+
             }
             //var userName = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var userName = "TestE";
@@ -68,21 +80,7 @@ namespace Songbook_backend.Songs.Controllers
             
             _context.Entry(song).State = EntityState.Modified;
 
-            //try
-            //{
-                await _context.SaveChangesAsync();
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (!SongExists(id))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
@@ -90,17 +88,23 @@ namespace Songbook_backend.Songs.Controllers
         // POST: api/Songs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Song>> PostSong([FromBody] CreateSongRequest song)
+        public async Task<ActionResult<Song>> PostSong([FromBody] CreateSongRequest songRequest)
         {
-            if (_songService.TitleIsAlreadyUsed(song.Title))
+            if(_songService.TitleIsAlreadyUsed(songRequest.Title))
             {
                 return BadRequest("Title is already taken");
+
+            }
+
+            if(_songService.TitleOriginIsAlreadyUsed(songRequest.TitleOrigin))
+            {
+                return BadRequest("TitleOrigin is already taken");
 
             }
             //var userName = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var userName = "Test";
 
-            var newSong = _songService.CreateSong(song, userName);
+            var newSong = _songService.CreateSong(songRequest, userName);
 
             _context.Songs.Add(newSong);
             await _context.SaveChangesAsync();
@@ -133,6 +137,7 @@ namespace Songbook_backend.Songs.Controllers
         {
             return (_context.Songs?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
     }
 
 }

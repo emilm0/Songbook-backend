@@ -83,12 +83,12 @@ public class SongService : ISongService
     public bool TitleIsAlreadyUsed(string title)
     {
         var song = _context.Songs.FirstOrDefault(s => s.Title == title);
-        if (song == null)
-        {
-            return false;
-        }
-
-        return true;
+        return song != null ? true : false;
+    }
+    public bool TitleOriginIsAlreadyUsed(string title)
+    {
+        var song = _context.Songs.FirstOrDefault(s => s.TitleOrigin == title);
+        return song != null ? true : false;
     }
 
     public Guid FindSongIdByTitle(string title)
