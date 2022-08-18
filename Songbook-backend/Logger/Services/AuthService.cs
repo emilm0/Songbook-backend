@@ -99,13 +99,13 @@ public class AuthService : IAuthService
 
     public void DeleteAllRefreshTokensByUserId(Guid userId)
     {
-        var refreshToken = _context.RefreshTokens.FirstOrDefault(r => r.UserId == userId);
+        var refreshToken = _context.RefreshTokens.Find(userId);
 
         while (refreshToken != null)
         {
             _context.Remove(refreshToken);
             _context.SaveChanges();
-            refreshToken = _context.RefreshTokens.FirstOrDefault(r => r.UserId == userId);
+            refreshToken = _context.RefreshTokens.Find(userId);
         }
 
         _context.SaveChanges();

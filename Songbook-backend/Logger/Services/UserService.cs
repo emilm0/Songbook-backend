@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Songbook_backend.Logger.Models;
+﻿using Songbook_backend.Logger.Models;
 using TestSongbook.Models.Requests;
 
 namespace Songbook_backend.Logger.Services;
@@ -30,7 +29,7 @@ public class UserService : IUserService
 
     public string GetUserRoleNameById(Guid id)
     {
-        return _context.UserRoles.FirstOrDefault(r => r.Id == id).Name;
+        return _context.UserRoles.Find(id).Name;
 
     }
 
