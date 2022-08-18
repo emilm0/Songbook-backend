@@ -4,6 +4,12 @@ namespace Songbook_backend.Songs.Services;
 
 public class EditionService : IEditionService
 {
+    private readonly SongbookContext _context;
+    public EditionService(SongbookContext context)
+    {
+        _context = context;
+    }
+
     public Edition CreateEdition(Guid songId, string editionComment, string editorName)
     {
         var edition = new Edition()
@@ -16,4 +22,17 @@ public class EditionService : IEditionService
 
         return edition;
     }
+
+    public void DeleteEdition(Guid songId)
+    {
+        var edition = _context.Editions.FirstOrDefault(e => e.SongId == songId);
+
+        while(edition != null)
+        {
+            _context.Editions.Remove(edition);
+            _context.SaveChanges();
+            edition = _context.Editions.FirstOrDefault(e => e.SongId == songId);
+        }
+    }
+
 }

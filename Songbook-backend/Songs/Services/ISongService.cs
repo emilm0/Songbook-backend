@@ -9,6 +9,4 @@ public interface ISongService
     public bool TitleIsAlreadyUsed (string title);
     public Guid FindSongIdByTitle(string title);
     public Song UpdateSong(Guid id, EditSongRequest songRequest, string editorName);
-
-
 }

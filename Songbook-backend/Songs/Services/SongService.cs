@@ -126,12 +126,9 @@ public class SongService : ISongService
 
         int counterOfSongs = songs.Count();
 
-        Console.WriteLine(" **** Counter of songs: " + counterOfSongs);
-
         for(int i = 1; i <= counterOfSongs; i++)
         {
             var song = _context.Songs.FirstOrDefault(s => s.Signature == firstLetter + i);
-            Console.WriteLine("  ******  Signature in for loop: " + firstLetter + i);
             if (song == null)
             {
                 return firstLetter + i;

@@ -13,11 +13,13 @@ namespace Songbook_backend.Songs.Controllers
     {
         private readonly SongbookContext _context;
         private readonly ISongService _songService;
+        private readonly IEditionService _editionService;
 
-        public SongsController(SongbookContext context, ISongService songService)
+        public SongsController(SongbookContext context, ISongService songService, IEditionService editionService)
         {
             _context = context;
             _songService = songService;
+            _editionService = editionService;
         }
 
         // GET: api/Songs
@@ -54,6 +56,11 @@ namespace Songbook_backend.Songs.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSong(Guid id, EditSongRequest songRequest)
         {
+            //var songToUpdate = _context.Songs.Find(id);
+            if(!SongExists(id))
+            {
+                return NotFound();
+            }
             //var userName = HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var userName = "TestE";
 
@@ -61,21 +68,21 @@ namespace Songbook_backend.Songs.Controllers
             
             _context.Entry(song).State = EntityState.Modified;
 
-            try
-            {
+            //try
+            //{
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SongExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    if (!SongExists(id))
+            //    {
+            //        return NotFound();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
 
             return NoContent();
         }
@@ -115,6 +122,7 @@ namespace Songbook_backend.Songs.Controllers
                 return NotFound();
             }
 
+            _editionService.DeleteEdition(song.Id);
             _context.Songs.Remove(song);
             await _context.SaveChangesAsync();
 
