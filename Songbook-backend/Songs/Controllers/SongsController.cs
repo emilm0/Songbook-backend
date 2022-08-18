@@ -134,6 +134,7 @@ namespace Songbook_backend.Songs.Controllers
                 return NotFound();
             }
 
+            _lineService.DeleteLines(song.Id);
             _editionService.DeleteEdition(song.Id);
             _context.Songs.Remove(song);
             await _context.SaveChangesAsync();

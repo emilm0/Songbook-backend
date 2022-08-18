@@ -10,7 +10,7 @@ public class SongbookContext : DbContext
     public SongbookContext(DbContextOptions<SongbookContext> options)
         : base(options)
     {
-        Seed();
+        //Seed();
     }
 
     //Logger

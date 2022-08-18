@@ -7,6 +7,6 @@ public interface ILineService
 {
     public Line CreateLine(Guid songId, LineRequest lineRequest);
     public IEnumerable<Line> CreateLineList(Guid songId, List<LineRequest> linesRequest);
-
+    public void DeleteLines(Guid songId);
 
 }

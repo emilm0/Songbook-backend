@@ -38,6 +38,17 @@ public class LineService : ILineService
         return line;
     }
 
+    public void DeleteLines(Guid songId)
+    {
+        var line = _context.Lines.FirstOrDefault(l => l.SongId == songId);
+        while(line != null)
+        {
+            _context.Lines.Remove(line);
+            _context.SaveChanges();
+            line = _context.Lines.FirstOrDefault(l => l.SongId == songId);
+        }
+    }
+
     private Guid FindSongPartIdByName(string songPartName)
     {
         var songPart = _context.SongParts.FirstOrDefault(p => p.Name == songPartName);
