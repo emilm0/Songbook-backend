@@ -1,5 +1,5 @@
 ﻿global using Microsoft.EntityFrameworkCore;
-global using TestSongbook;
+global using Songbook_backend;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -32,6 +32,7 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ITokenGenerator, TokenGenerator>();
 builder.Services.AddTransient<IRefreshTokenValidator, RefreshTokenValidator>();
 builder.Services.AddTransient<ISongService, SongService>();
+builder.Services.AddTransient<IEditionService, EditionService>();
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<SongbookContext>(options =>

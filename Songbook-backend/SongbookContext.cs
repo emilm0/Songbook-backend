@@ -1,7 +1,8 @@
-﻿using Songbook_backend.Logger.Models;
+﻿
+using Songbook_backend.Logger.Models;
 using Songbook_backend.Songs.Models;
 
-namespace TestSongbook;
+namespace Songbook_backend;
 
 public class SongbookContext : DbContext
 {
@@ -23,6 +24,7 @@ public class SongbookContext : DbContext
     public DbSet<SongGroup> SongGroups { get; set; }
     public DbSet<SongType> SongTypes { get; set; }
     public DbSet<SongPart> SongParts { get; set; }
+    public DbSet<Edition> Editions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -92,5 +94,18 @@ public class SongbookContext : DbContext
         };
 
         return types;
+    }
+
+    private IEnumerable<SongPart> GetSongParts()
+    {
+        var songParts = new List<SongPart>()
+        {
+            new SongPart() { Name = "Intro" },
+            new SongPart() { Name = "Stanza" },
+            new SongPart() { Name = "Refrain" },
+            new SongPart() { Name = "Bridge" },
+        };
+
+        return songParts;
     }
 }

@@ -5,6 +5,10 @@ namespace Songbook_backend.Songs.Services;
 
 public interface ISongService
 {
-    public Song CreateSong(CreateSongRequest song);
+    public Song CreateSong(CreateSongRequest song, string creatorName);
     public bool TitleIsAlreadyUsed (string title);
+    public Guid FindSongIdByTitle(string title);
+    public Song UpdateSong(Guid id, EditSongRequest songRequest, string editorName);
+
+
 }

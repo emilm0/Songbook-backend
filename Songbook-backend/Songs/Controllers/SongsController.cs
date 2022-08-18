@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Songbook_backend.Songs.Models;
 using Songbook_backend.Songs.Models.Request;
 using Songbook_backend.Songs.Services;
-using TestSongbook;
+using System.Security.Claims;
 
 namespace Songbook_backend.Songs.Controllers
 {
@@ -57,13 +52,13 @@ namespace Songbook_backend.Songs.Controllers
         // PUT: api/Songs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSong(Guid id, Song song)
+        public async Task<IActionResult> PutSong(Guid id, EditSongRequest songRequest)
         {
-            if (id != song.Id)
-            {
-                return BadRequest();
-            }
+            //var userName = HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            var userName = "TestE";
 
+            var song = _songService.UpdateSong(id, songRequest, userName);
+            
             _context.Entry(song).State = EntityState.Modified;
 
             try
@@ -90,13 +85,15 @@ namespace Songbook_backend.Songs.Controllers
         [HttpPost]
         public async Task<ActionResult<Song>> PostSong([FromBody] CreateSongRequest song)
         {
-            if (_songService.TitleIsAlreadyUsed(song.TitlePl))
+            if (_songService.TitleIsAlreadyUsed(song.Title))
             {
                 return BadRequest("Title is already taken");
 
             }
+            //var userName = HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            var userName = "Test";
 
-            var newSong = _songService.CreateSong(song);
+            var newSong = _songService.CreateSong(song, userName);
 
             _context.Songs.Add(newSong);
             await _context.SaveChangesAsync();
@@ -129,4 +126,5 @@ namespace Songbook_backend.Songs.Controllers
             return (_context.Songs?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
+
 }
