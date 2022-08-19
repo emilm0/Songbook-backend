@@ -82,15 +82,20 @@ public class SongService : ISongService
         return updatedSong;
     }
 
-    public bool TitleIsAlreadyUsed(string title)
+    public Guid SongIdWithTheSameTitles(string title, string titleOrigin)
     {
         var song = _context.Songs.FirstOrDefault(s => s.Title == title);
-        return song != null ? true : false;
-    }
-    public bool TitleOriginIsAlreadyUsed(string title)
-    {
-        var song = _context.Songs.FirstOrDefault(s => s.TitleOrigin == title);
-        return song != null ? true : false;
+        if(song == null)
+        {
+            song = _context.Songs.FirstOrDefault(s => s.TitleOrigin == titleOrigin);
+            if( song == null)
+            {
+                return Guid.Empty;
+            }
+
+            return song.Id;
+        }
+        return song.Id;
     }
 
     public Guid FindSongIdByTitle(string title)
