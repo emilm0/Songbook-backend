@@ -5,6 +5,8 @@ namespace Songbook_backend.Songs.Services;
 
 public interface ILineService
 {
+    public List<Line> GetLineList(Guid songId);
+
     public Line CreateLine(Guid songId, LineRequest lineRequest);
     public IEnumerable<Line> CreateLineList(Guid songId, List<LineRequest> linesRequest);
     public Line UpdateLine(EditLineRequest lineRequest);

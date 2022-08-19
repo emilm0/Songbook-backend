@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Songbook_backend.Songs.Models;
 using Songbook_backend.Songs.Models.Request;
+using Songbook_backend.Songs.Models.Response;
 using Songbook_backend.Songs.Services;
 using System.Security.Claims;
 
@@ -40,7 +41,7 @@ public class SongsController : ControllerBase
 
     // GET: api/Songs/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Song>> GetSong(Guid id)
+    public async Task<ActionResult<SongResponse>> GetSong(Guid id)
     {
         if (_context.Songs == null)
         {
@@ -53,7 +54,8 @@ public class SongsController : ControllerBase
             return NotFound();
         }
 
-        return song;
+        var songResponse =_songService.GetSongWithLinse(song.Id);
+        return songResponse;
     }
 
     // PUT: api/Songs/5

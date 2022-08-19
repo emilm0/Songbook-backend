@@ -11,6 +11,13 @@ public class LineService : ILineService
     {
         _context = context;
     }
+
+    public List<Line> GetLineList(Guid songId)
+    {
+        var lines = _context.Lines.Where(l => l.SongId == songId).ToList();
+        return lines;        
+        
+    }
     public IEnumerable<Line> CreateLineList(Guid songId, List<LineRequest> linesRequest)
     {
         var lines = new List<Line>();

@@ -1,5 +1,6 @@
 ﻿using Songbook_backend.Songs.Models;
 using Songbook_backend.Songs.Models.Request;
+using Songbook_backend.Songs.Models.Response;
 using System.Data;
 
 namespace Songbook_backend.Songs.Services;
@@ -15,6 +16,15 @@ public class SongService : ISongService
         _context = context;
         _editionService = editionService;
         _lineService = lineService;
+    }
+
+    public SongResponse GetSongWithLinse(Guid id)
+    {
+        var song = _context.Songs.Find(id);
+        var lines = _lineService.GetLineList(id);
+
+        SongResponse response = new SongResponse(song, lines);
+        return response;
     }
 
     public Song CreateSong(CreateSongRequest songRequest, string creatorName)
