@@ -30,4 +30,5 @@ public class EditSongRequest
     public bool IsRedayToUse { get; set; }
     [Required]
     public string EditionComment { get; set; }
+    public List<EditLineRequest> Lines { get; set; }
 }

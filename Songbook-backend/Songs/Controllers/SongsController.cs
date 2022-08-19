@@ -82,7 +82,11 @@ public class SongsController : ControllerBase
         var lines = songRequest.Lines;
         foreach (var line in lines)
         {
-            //_context.Entry(line).State = EntityState.Modified;
+            var updatedLine = _lineService.UpdateLine(line);
+            if(updatedLine != null)
+            {
+                _context.Entry(updatedLine).State = EntityState.Modified;
+            }
         }
 
         await _context.SaveChangesAsync();

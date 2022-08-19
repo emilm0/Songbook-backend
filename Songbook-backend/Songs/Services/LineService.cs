@@ -38,6 +38,30 @@ public class LineService : ILineService
         return line;
     }
 
+    public Line? UpdateLine(EditLineRequest lineRequest)
+    {
+        if(lineRequest.Text == "")
+        {
+            DeleteLine(lineRequest.Id);
+            return null;
+        }
+
+        var updatedLine = _context.Lines.Find(lineRequest.Id);
+
+        {
+            updatedLine.Text = lineRequest.Text;
+            updatedLine.TextOrigin = lineRequest.TextOrigin;
+            updatedLine.Chords = lineRequest.Chords;
+            updatedLine.ChordsOrigin = lineRequest.ChordsOrigin;
+        }
+        return updatedLine;
+    }
+    public void DeleteLine(Guid lineId)
+    {
+        var line = _context.Lines.Find(lineId);
+        _context.Lines.Remove(line);
+        _context.SaveChanges();
+    }
     public void DeleteLines(Guid songId)
     {
         var line = _context.Lines.FirstOrDefault(l => l.SongId == songId);
