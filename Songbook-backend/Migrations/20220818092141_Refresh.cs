@@ -25,7 +25,7 @@ namespace Songbook_backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Lines",
+                name: "UpdatedLines",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -162,7 +162,7 @@ namespace Songbook_backend.Migrations
                 name: "Editions");
 
             migrationBuilder.DropTable(
-                name: "Lines");
+                name: "UpdatedLines");
 
             migrationBuilder.DropTable(
                 name: "RefreshTokens");

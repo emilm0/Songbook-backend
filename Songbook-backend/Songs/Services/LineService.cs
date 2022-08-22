@@ -18,7 +18,7 @@ public class LineService : ILineService
         return lines;        
         
     }
-    public IEnumerable<Line> CreateLineList(Guid songId, List<LineRequest> linesRequest)
+    public List<Line> CreateLineList(Guid songId, List<LineRequest> linesRequest)
     {
         var lines = new List<Line>();
         foreach(var line in linesRequest)

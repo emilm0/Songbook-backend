@@ -81,16 +81,26 @@ public class SongsController : ControllerBase
 
         _context.Entry(song).State = EntityState.Modified;
 
-        var lines = songRequest.Lines;
-        foreach (var line in lines)
+        var updatedlines = songRequest.UpdatedLines;
+        if(updatedlines != null)
         {
-            var updatedLine = _lineService.UpdateLine(line);
-            if(updatedLine != null)
+            foreach (var line in updatedlines)
             {
-                _context.Entry(updatedLine).State = EntityState.Modified;
+                var updatedLine = _lineService.UpdateLine(line);
+                if (updatedLine != null)
+                {
+                    _context.Entry(updatedLine).State = EntityState.Modified;
+                }
             }
         }
 
+        var newLines = songRequest.NewLines;
+        if(newLines != null)
+        {
+            var lines = _lineService.CreateLineList(id, newLines);
+            _context.Lines.AddRange(lines);
+
+        }
         await _context.SaveChangesAsync();
 
         return NoContent();

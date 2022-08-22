@@ -145,7 +145,7 @@ namespace Songbook_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Lines");
+                    b.ToTable("UpdatedLines");
                 });
 
             modelBuilder.Entity("Songbook_backend.Songs.Models.Song", b =>

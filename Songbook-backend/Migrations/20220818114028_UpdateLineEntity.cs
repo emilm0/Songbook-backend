@@ -10,7 +10,7 @@ namespace Songbook_backend.Migrations
         {
             migrationBuilder.RenameColumn(
                 name: "TextPL",
-                table: "Lines",
+                table: "UpdatedLines",
                 newName: "Text");
         }
 
@@ -18,7 +18,7 @@ namespace Songbook_backend.Migrations
         {
             migrationBuilder.RenameColumn(
                 name: "Text",
-                table: "Lines",
+                table: "UpdatedLines",
                 newName: "TextPL");
         }
     }
