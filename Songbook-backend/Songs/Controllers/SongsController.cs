@@ -30,13 +30,13 @@ public class SongsController : ControllerBase
 
     // GET: api/Songs
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Song>>> GetSongs()
+    public async Task<ActionResult<IEnumerable<SongResponse>>> GetSongs()
     {
         if (_context.Songs == null)
         {
             return NotFound();
         }
-        return await _context.Songs.ToListAsync();
+        return Ok (_songService.GetSongsResponse());
     }
 
     // GET: api/Songs/5
@@ -54,7 +54,7 @@ public class SongsController : ControllerBase
             return NotFound();
         }
 
-        var songResponse =_songService.GetSongWithLinse(song.Id);
+        var songResponse =_songService.GetSongResponse(song.Id);
         return songResponse;
     }
 

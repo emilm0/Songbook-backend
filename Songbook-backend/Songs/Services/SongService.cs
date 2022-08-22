@@ -18,7 +18,18 @@ public class SongService : ISongService
         _lineService = lineService;
     }
 
-    public SongResponse GetSongWithLinse(Guid id)
+    public IEnumerable<SongResponse> GetSongsResponse()
+    {
+        var songs =  _context.Songs.ToList();
+        var songsResponse = new List<SongResponse>();
+        foreach(var song in songs)
+        {
+            songsResponse.Add(GetSongResponse(song.Id));
+        }
+
+        return songsResponse.AsEnumerable();
+    }
+    public SongResponse GetSongResponse(Guid id)
     {
         var song = _context.Songs.Find(id);
         var lines = _lineService.GetLineList(id);

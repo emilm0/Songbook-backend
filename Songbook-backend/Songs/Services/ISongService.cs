@@ -6,7 +6,8 @@ namespace Songbook_backend.Songs.Services;
 
 public interface ISongService
 {
-    public SongResponse GetSongWithLinse(Guid id);
+    public SongResponse GetSongResponse(Guid id);
+    public IEnumerable<SongResponse> GetSongsResponse();
     public Song CreateSong(CreateSongRequest song, string creatorName);
     public Guid SongIdWithTheSameTitles(string title, string titleOrigin);
     public Guid FindSongIdByTitle(string title);
